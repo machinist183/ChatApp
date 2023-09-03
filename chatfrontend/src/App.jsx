@@ -5,15 +5,22 @@ import { createBrowserRouter ,
 import Landing from './pages/Landing'
 import {NextUIProvider} from "@nextui-org/react";
 import Register from "./pages/Register";
-import Login from "./pages/Login";
+import Login, { loader as loginLoader, loginAction } from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 
 const router = createBrowserRouter(createRoutesFromElements(
   <>
-   <Route path='/' element ={<Landing/>}>
+    <Route path='/' element ={<Landing/>}>
 
-</Route>
-    <Route path="/login" element={<Login/>}/>
-    <Route path="/register" element={<Register/>}/> 
+    </Route>
+    <Route path="/login"
+           element={<Login/>}
+           loader={loginLoader}
+           action={loginAction}/>
+    <Route path="/register"
+           element={<Register/>}/> 
+    <Route path="/dashboard"
+           element={<Dashboard/>}/>
   </>
   
   
