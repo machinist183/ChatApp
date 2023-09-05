@@ -8,10 +8,9 @@ import { faGear , faMessage ,
          faArrowRightFromBracket,
          faSun ,
          faMoon } from '@fortawesome/free-solid-svg-icons';
-import Lottie  from "lottie-react";
-import darkModeData from "../assets/lotties/darkMode.json";
-import { useRef , useState } from "react";
-import { SunIcon , MoonIcon } from "../componets/DarkModeIcons";
+
+import {  useState } from "react";
+
 
 export default function DashboardNavbar(){
     let iconSize = "xl"
@@ -20,6 +19,8 @@ export default function DashboardNavbar(){
     function darkModeToggle(){
         setDarkMode(darkMode=>!darkMode)
     }
+    let iconClasses = "text-[1.5rem]"
+    let tabClasses = "h-16"
     return(
         <div className="flex flex-col justify-between items-center
                         h-[100vh] min-w-20
@@ -35,51 +36,56 @@ export default function DashboardNavbar(){
             }}>
                 <Tab key="chat"
                      title ={
-                        <Link to="#">
+                        <Link to="messages">
                             <FontAwesomeIcon icon={faMessage} 
-                                             size={iconSize}
+                                             className={iconClasses + " "}
                             />
                         </Link>
                      }
-                     className="h-12"
+                     className={tabClasses + " "}
 
                 />   
                 <Tab key="explore"
                      title ={
                         <Link to="#">
                             <FontAwesomeIcon icon={faMagnifyingGlassArrowRight}
-                                               size={iconSize}
+                                             className={iconClasses + " "}
                               />
                         </Link>
                      }
-                     className="h-12"
+                     className={tabClasses + " "}
 
                 />         
                 <Tab key="friends"
                      title ={
                         <Link to="#">
-                           <FontAwesomeIcon icon={faUserGroup}    size={iconSize}/>
+                           <FontAwesomeIcon icon={faUserGroup} 
+                                            className={iconClasses + " "}
+                            />
                         </Link>
                      }
-                     className="h-12"
+                     className={tabClasses + " "}
 
                 />
                 <Tab key="privacy"
                      title ={
                         <Link to="#">
-                            <FontAwesomeIcon icon={faLock}   size={iconSize} />
+                            <FontAwesomeIcon icon={faLock}   
+                                             className={iconClasses + " "}
+                             />
                         </Link>
                      }
-                     className="h-12"
+                     className={tabClasses + " "}
 
                 /> 
                 <Tab key="settings"
                      title={
                         <Link to="#">
-                           <FontAwesomeIcon icon={faGear} size={iconSize} />
+                           <FontAwesomeIcon icon={faGear} 
+                                            className={iconClasses + " "} />
                         </Link>
                      }
-                     className="h-12"
+                     className={tabClasses + " "}
                 />   
             </Tabs>
             <div className="flex flex-col justify-around w-[100%] items-center gap-4 mb-20">
