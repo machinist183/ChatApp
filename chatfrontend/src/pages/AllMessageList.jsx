@@ -4,7 +4,10 @@ import {Tabs, Tab, Card, CardBody} from "@nextui-org/react";
 export default function AllMessageList() {
   return (
     <div className="flex w-full flex-col">
-      <Tabs aria-label="Options">
+      <Tabs aria-label="Options"
+            classNames={{
+              tabList:["flex flex-col "]
+            }}>
         <Tab key="photos" title="Photos">
           <Card>
             <CardBody>
