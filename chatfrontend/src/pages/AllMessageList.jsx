@@ -1,35 +1,83 @@
 import React from "react";
-import {Tabs, Tab, Card, CardBody} from "@nextui-org/react";
+import { Listbox , ListboxItem , Avatar , ListboxSection } from "@nextui-org/react";
+import { getGroupConversationListApi, getPrivateConversationListApi } from "../data/dataApi";
+import { Link, useLoaderData } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+
+
+export function dummyLoader(){
+  const privateConvoDataList = getPrivateConversationListApi(2)
+  const groupConversationDataList = getGroupConversationListApi(2)
+  return { privateConvoDataList , groupConversationDataList }
+}
+
+const UserAvatar = (props) => {
+  return(
+      <Link to={`see_profile/${props.id}`}>
+        <Avatar isBordered radius="sm" src={props.avatar} />
+      </Link>
+  )
+}
+
+
+const DescriptionLink = (props)=>(<Link to={`conversation/${props.type}/${props.id}`}>{props.content}</Link>)
+
 
 export default function AllMessageList() {
+  const { privateConvoDataList , groupConversationDataList } = useLoaderData()
+
   return (
-    <div className="flex w-full flex-col">
-      <Tabs aria-label="Options"
-            classNames={{
-              tabList:["flex flex-col "]
-            }}>
-        <Tab key="photos" title="Photos">
-          <Card>
-            <CardBody>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </CardBody>
-          </Card>  
-        </Tab>
-        <Tab key="music" title="Music">
-          <Card>
-            <CardBody>
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            </CardBody>
-          </Card>  
-        </Tab>
-        <Tab key="videos" title="Videos">
-          <Card>
-            <CardBody>
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </CardBody>
-          </Card>  
-        </Tab>
-      </Tabs>
-    </div>  
-  );
+    <div className="flex flex-row">
+      <Listbox className="w-[30%]">
+        <ListboxSection title="Private Chats" showDivider>
+          {privateConvoDataList.map((conversation)=>{
+            return(
+                <ListboxItem
+                  key={conversation.conversation_id}
+                  description={<DescriptionLink id={conversation.conversation_id}
+                                                type='private' 
+                                                content={conversation.lastMessage}/>
+                              }
+                  startContent={<UserAvatar avatar={conversation.avatar}
+                                            id={conversation.receiverUserId}/>
+                               }
+                  variant="shadow"
+                >
+                   {<DescriptionLink id={conversation.conversation_id} 
+                                     type='private' 
+                                     content={conversation.username}/>
+                    }
+                </ListboxItem>
+
+            )
+          })}
+        </ListboxSection>
+
+        <ListboxSection title="Group Chats" showDivider>
+          {groupConversationDataList.map((conversation)=>{
+            return(
+                <ListboxItem
+                  key={conversation.conversation_id}
+                  description={<DescriptionLink id={conversation.conversation_id}
+                                                type='group' 
+                                                content={conversation.lastMessage}/>
+                                }
+                  startContent={<UserAvatar avatar={conversation.avatar}
+                                            id={conversation.groupId}/>
+                                }
+                  variant="shadow"
+                >
+                    {<DescriptionLink id={conversation.conversation_id}
+                                      type='group'
+                                      content={conversation.username}/>
+                    }
+
+                </ListboxItem>
+            )
+          })}
+        </ListboxSection>  
+      </Listbox>
+      <Outlet/>
+    </div>
+  )
 }
