@@ -1,38 +1,41 @@
 import React from "react";
 import {Avatar , Navbar, NavbarBrand, NavbarContent, NavbarItem, Button} from "@nextui-org/react";
 import { Link } from "react-router-dom";
-
-import { faVideo } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faVideo , faPhone , faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 
 export default function ConversationBanner(props) {
 
     const userDetails = props.userDetails
-
+    const navitemClasses = "mx-2 text-xl"
 
   return (
-    <Navbar isBordered>
-      <NavbarBrand>
-        <Link to="#" className="flex flex-row border-2 border-black p-auto">
-            <Avatar isBordered radius="sm" src={userDetails.avatar}/>
-            <h3>{userDetails.username}</h3>
+    <Navbar isBordered className="h-20" >
+      <NavbarBrand  className="">
+        <Link to="#" className="min-w-[40%] flex flex-row items-center border-2 border-black p-2">
+            <Avatar isBordered radius="sm" src={userDetails.avatar}
+                    className="mr-2"
+            />
+            <h3 className="font-normal">{userDetails.username}</h3>
         </Link>
       </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center"> 
+      <NavbarContent className="flex flex-row mx-auto border-2 border-black px-4" justify="centre"
+                  > 
         <NavbarItem>
-          <Link  to="#">
-            Integrations
+          <Link  to="#" className={navitemClasses}>
+          <FontAwesomeIcon icon={faVideo} />
           </Link>
         </NavbarItem>
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link to="#">Login</Link>
+        <NavbarItem>
+          <Link  to="#" className={navitemClasses}>
+          <FontAwesomeIcon icon={faPhone} />
+          </Link>
         </NavbarItem>
-        {/* <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem> */}
+        <NavbarItem>
+          <Link  to="#" className={navitemClasses}>
+          <FontAwesomeIcon icon={faEllipsisVertical} />
+          </Link>
+        </NavbarItem>
       </NavbarContent>
     </Navbar>
   );

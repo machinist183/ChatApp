@@ -1,5 +1,5 @@
 import { Tabs , Tab , Avatar , Button , Switch} from "@nextui-org/react";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear , faMessage ,
          faMagnifyingGlassArrowRight,
@@ -11,9 +11,9 @@ import { faGear , faMessage ,
 
 import {  useState } from "react";
 
-
-export default function DashboardNavbar(){
+export default function DashboardNavbar(props){
     let iconSize = "xl"
+    const userDetails = props.userDetails
     const [darkMode , setDarkMode] = useState(false)
 
     function darkModeToggle(){
@@ -27,7 +27,7 @@ export default function DashboardNavbar(){
                          shadow-lg hover:shadow-2xl">
             <Link to="#"
                   className="mt-8 mb-6">
-                <Avatar isBordered radius="sm" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+                <Avatar isBordered radius="sm" src={userDetails.avatar} />
             </Link>
 
             <Tabs className="w-[100%] "

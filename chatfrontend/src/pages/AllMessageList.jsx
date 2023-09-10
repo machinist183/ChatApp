@@ -5,9 +5,10 @@ import { Link, useLoaderData } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 
 
-export function dummyLoader(){
-  const privateConvoDataList = getPrivateConversationListApi(2)
-  const groupConversationDataList = getGroupConversationListApi(2)
+export function loader({params}){
+  const userId = params.userId
+  const privateConvoDataList = getPrivateConversationListApi(parseInt(userId))
+  const groupConversationDataList = getGroupConversationListApi(parseInt(userId))
   return { privateConvoDataList , groupConversationDataList }
 }
 

@@ -7,9 +7,11 @@ import {NextUIProvider} from "@nextui-org/react";
 import Register from "./pages/Register";
 import Login, { loader as loginLoader, loginAction } from "./pages/Login";
 import DashboardLayout from "./pages/DashboardLayout";
-import AllMessageList, { dummyLoader } from "./pages/AllMessageList";
+import AllMessageList, { loader as messageLoader } from "./pages/AllMessageList";
 import ConversationBox, { loader } from "./pages/ConversationBox";
 import { loader as conversationLoader } from "./pages/ConversationBox";
+import { loader as layoutLoader } from "./pages/DashboardLayout";
+
 
 const router = createBrowserRouter(createRoutesFromElements(
   <>
@@ -20,12 +22,13 @@ const router = createBrowserRouter(createRoutesFromElements(
            action={loginAction}/>
     <Route path="/register"
            element={<Register/>}/>
-    <Route path="dashboard"
-          element={<DashboardLayout/>}>
+    <Route path="dashboard/:userId"
+          element={<DashboardLayout/>}
+          loader={layoutLoader}>
           <Route
                 path="messages"
                 element={<AllMessageList/>}
-                loader={dummyLoader}>
+                loader={messageLoader}>
                 <Route
                   path="conversation/:type/:id"
                   element={<ConversationBox/>}

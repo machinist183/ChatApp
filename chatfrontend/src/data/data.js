@@ -366,7 +366,8 @@ for(let i=1 ; i<=100; i++ ){
         }
     } else {
         const validMessages = privatemessagesData.filter((message) => {
-            return (message.receiverId === privateReceiver) && (message.senderId === privateSender);
+            return ((message.receiverId === privateReceiver) && (message.senderId === privateSender) ||
+            (message.receiverId === privateSender) && (message.senderId === privateReceiver));
         });
         if (validMessages.length > 0) {
             messageList = validMessages.map((message) => message.id);

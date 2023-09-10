@@ -1,180 +1,181 @@
-export const groupData = [
+export  const groupData = [
   {
     "id": 1,
-    "avatar": "https://i.pravatar.cc/299",
+    "avatar": "https://i.pravatar.cc/583",
     "username": "Tech Enthusiasts",
     "cover_pic": "https://picsum.photos/200/300",
     "description": "A group for technology enthusiasts to discuss the latest tech trends, gadgets, and innovations.",
     "mood": "Happy",
     "members": [
+      18,
       7,
-      17,
+      4,
+      14,
+      16,
+      9,
+      11,
       13,
-      1
+      3,
+      8
     ],
-    "created_at": "2023-07-05T11:14:21.254Z"
+    "created_at": "2023-07-14T07:43:57.095Z"
   },
   {
     "id": 2,
-    "avatar": "https://i.pravatar.cc/710",
+    "avatar": "https://i.pravatar.cc/536",
     "username": "Foodies Unite",
     "cover_pic": "https://picsum.photos/200/300",
     "description": "Join us in exploring the culinary world, from sharing recipes to discovering the best restaurants in town.",
     "mood": "Excited",
     "members": [
-      18,
-      20,
-      6,
-      16,
-      12,
       9,
-      5,
-      14
+      16,
+      18,
+      1,
+      13,
+      6
     ],
-    "created_at": "2023-07-05T01:29:13.363Z"
+    "created_at": "2023-07-22T23:29:30.952Z"
   },
   {
     "id": 3,
-    "avatar": "https://i.pravatar.cc/600",
+    "avatar": "https://i.pravatar.cc/817",
     "username": "Adventure Seekers",
     "cover_pic": "https://picsum.photos/200/300",
     "description": "For those who live for adrenaline, outdoor adventures, and exploring the great unknown.",
     "mood": "Relaxed",
     "members": [
-      20,
+      10,
+      6,
+      1,
+      17,
+      12,
+      13,
+      7,
+      8,
       16,
-      15,
-      19,
-      11
+      18
     ],
-    "created_at": "2023-07-16T11:56:03.215Z"
+    "created_at": "2023-07-15T10:02:32.226Z"
   },
   {
     "id": 4,
-    "avatar": "https://i.pravatar.cc/35",
+    "avatar": "https://i.pravatar.cc/208",
     "username": "Artists' Corner",
     "cover_pic": "https://picsum.photos/200/300",
     "description": "Connect with fellow artists and creators, share your work, and find inspiration in the world of art.",
     "mood": "Feeling at peace",
     "members": [
       12,
-      16,
-      7,
-      13,
-      4,
-      14,
-      11,
-      5,
-      1
+      6,
+      1,
+      11
     ],
-    "created_at": "2023-07-05T20:31:44.394Z"
+    "created_at": "2023-07-06T02:01:04.414Z"
   },
   {
     "id": 5,
-    "avatar": "https://i.pravatar.cc/553",
+    "avatar": "https://i.pravatar.cc/449",
     "username": "Fitness Fanatics",
     "cover_pic": "https://picsum.photos/200/300",
     "description": "A community dedicated to fitness, workouts, and leading a healthy lifestyle. Get motivated and stay active.",
     "mood": "Energetic",
     "members": [
-      4,
-      8,
-      19,
       9,
-      11,
-      16,
-      14
+      8,
+      14,
+      10
     ],
-    "created_at": "2023-07-20T04:33:04.686Z"
+    "created_at": "2023-07-21T20:23:53.672Z"
   },
   {
     "id": 6,
-    "avatar": "https://i.pravatar.cc/99",
+    "avatar": "https://i.pravatar.cc/771",
     "username": "Book Lovers Club",
     "cover_pic": "https://picsum.photos/200/300",
     "description": "Dive into the world of literature, exchange book recommendations, and discuss your favorite novels.",
     "mood": "Calm and collected",
     "members": [
       20,
-      16,
-      7,
-      9,
-      12,
-      4,
-      18,
       13,
-      1,
-      3
+      8,
+      4,
+      2,
+      9,
+      15,
+      17,
+      7
     ],
-    "created_at": "2023-07-08T20:55:14.305Z"
+    "created_at": "2023-07-03T11:15:20.970Z"
   },
   {
     "id": 7,
-    "avatar": "https://i.pravatar.cc/654",
+    "avatar": "https://i.pravatar.cc/303",
     "username": "Movie Buffs Society",
     "cover_pic": "https://picsum.photos/200/300",
     "description": "Join us for movie nights, reviews, and discussions about everything related to the silver screen.",
     "mood": "Joyful and content",
     "members": [
+      2,
       6,
-      16,
-      5,
+      1,
       20,
+      19,
       4,
-      17,
-      15
+      13,
+      3
     ],
-    "created_at": "2023-07-29T03:52:26.237Z"
+    "created_at": "2023-07-25T07:48:53.822Z"
   },
   {
     "id": 8,
-    "avatar": "https://i.pravatar.cc/189",
+    "avatar": "https://i.pravatar.cc/124",
     "username": "Music Vibes Collective",
     "cover_pic": "https://picsum.photos/200/300",
     "description": "For music lovers of all genres, from jazz aficionados to rock enthusiasts. Share your favorite tunes and discover new ones.",
     "mood": "Motivated and determined",
     "members": [
-      2,
+      20,
+      4,
       19,
-      17,
-      12,
-      15,
+      10,
+      3,
       6,
-      16
+      5,
+      2,
+      17
     ],
-    "created_at": "2023-07-01T13:21:15.467Z"
+    "created_at": "2023-07-12T18:36:56.915Z"
   },
   {
     "id": 9,
-    "avatar": "https://i.pravatar.cc/825",
+    "avatar": "https://i.pravatar.cc/145",
     "username": "Volunteers Network",
     "cover_pic": "https://picsum.photos/200/300",
     "description": "Make a positive impact by joining our volunteer community. We organize events and projects to give back to the community.",
     "mood": "Peaceful and serene",
     "members": [
-      5,
-      19,
-      16,
-      6,
       3,
-      4,
-      9
+      2,
+      11,
+      6
     ],
-    "created_at": "2023-07-01T23:49:15.819Z"
+    "created_at": "2023-07-26T20:48:02.351Z"
   },
   {
     "id": 10,
-    "avatar": "https://i.pravatar.cc/312",
+    "avatar": "https://i.pravatar.cc/210",
     "username": "Travel Explorers",
     "cover_pic": "https://picsum.photos/200/300",
     "description": "Embark on journeys near and far with fellow travel enthusiasts. Share travel tips, itineraries, and unforgettable experiences.",
     "mood": "Optimistic about the future",
     "members": [
-      9,
       11,
-      12,
-      14
+      13,
+      20,
+      1,
+      17
     ],
-    "created_at": "2023-07-14T09:44:22.735Z"
+    "created_at": "2023-07-04T06:26:12.405Z"
   }
 ];
