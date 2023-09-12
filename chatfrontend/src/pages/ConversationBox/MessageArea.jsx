@@ -38,7 +38,10 @@ export default function MessageArea(props){
 
     const messageElements = messages.map((message)=>{
         return(
-            <Message message={message.content} avatar={userDetails.avatar} isCurrentUser={currentUserId === message.senderId} />
+            <Message key={message.id}
+                     message={message.content}
+                     avatar={userDetails.avatar}
+                     isCurrentUser={currentUserId === message.senderId} />
         )
     })
     const messageContainerRef = useRef(null);

@@ -11,7 +11,7 @@ import AllMessageList, { loader as messageLoader } from "./pages/AllMessageList"
 import ConversationBox, { loader } from "./pages/ConversationBox";
 import { loader as conversationLoader } from "./pages/ConversationBox";
 import { loader as layoutLoader } from "./pages/DashboardLayout";
-
+import { action as sendAction } from "./pages/ConversationBox/InputBox";
 
 const router = createBrowserRouter(createRoutesFromElements(
   <>
@@ -33,6 +33,7 @@ const router = createBrowserRouter(createRoutesFromElements(
                   path="conversation/:type/:id"
                   element={<ConversationBox/>}
                   loader= {conversationLoader}
+                  action={sendAction}
                 />
           </Route>
           

@@ -95,10 +95,8 @@ export function getGroupConversationListApi(id){
 
 export function getConversationDetailData(id, type) {
     try {
-        console.log(`conversatio Id= ${id}`)
         id = parseInt(id)
         const conversationForId = conversationData.find((conversation) => (conversation.id === id));
-        console.log(`Conversation DATA = ${JSON.stringify(conversationForId)}`)
 
         if (!conversationForId) {
             throw new Error(`Conversation with id ${id} not found.`);

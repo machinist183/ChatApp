@@ -3,6 +3,7 @@ import {Avatar , Navbar, NavbarBrand, NavbarContent, NavbarItem, Button} from "@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faVideo , faPhone , faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import UserPopover from "./UserPopover";
 
 export default function ConversationBanner(props) {
 
@@ -11,13 +12,8 @@ export default function ConversationBanner(props) {
 
   return (
     <Navbar isBordered className="h-20" >
-      <NavbarBrand  className="">
-        <Link to="#" className="min-w-[40%] flex flex-row items-center border-2 border-black p-2">
-            <Avatar isBordered radius="sm" src={userDetails.avatar}
-                    className="mr-2"
-            />
-            <h3 className="font-normal">{userDetails.username}</h3>
-        </Link>
+      <NavbarBrand  className="" >
+        <UserPopover userDetails={userDetails}/>
       </NavbarBrand>
       <NavbarContent className="flex flex-row mx-auto border-2 border-black px-4" justify="centre"
                   > 
