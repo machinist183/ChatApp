@@ -12,9 +12,10 @@ import { faGear , faMessage ,
 import {  useState } from "react";
 
 export default function DashboardNavbar(props){
-    let iconSize = "xl"
+    
     const userDetails = props.userDetails
     const [darkMode , setDarkMode] = useState(false)
+    let iconSize = "xl"
 
     function darkModeToggle(){
         setDarkMode(darkMode=>!darkMode)
@@ -25,8 +26,10 @@ export default function DashboardNavbar(props){
         <div className="flex flex-col justify-between items-center
                         h-[100vh] min-w-20
                          shadow-lg hover:shadow-2xl">
-            <Link to="#"
-                  className="mt-8 mb-6">
+            <Link to="profile"
+                  state={{'userdata': userDetails}}
+                  className="mt-8 mb-6"
+                  >
                 <Avatar isBordered radius="sm" src={userDetails.avatar} />
             </Link>
 

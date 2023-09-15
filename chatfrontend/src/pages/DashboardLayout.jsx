@@ -1,7 +1,7 @@
 
 import { Outlet, useLoaderData } from "react-router-dom";
 import { Tab , Tabs ,Chip, Button} from "@nextui-org/react";
-import { Link } from "@nextui-org/react";
+import { Link } from "react-router-dom";
 import DashboardNavbar from "./DashboardNavbar";
 import { getUserDetails } from "../data/dataApi";
 

@@ -12,6 +12,12 @@ import ConversationBox, { loader } from "./pages/ConversationBox";
 import { loader as conversationLoader } from "./pages/ConversationBox";
 import { loader as layoutLoader } from "./pages/DashboardLayout";
 import { action as sendAction } from "./pages/ConversationBox/InputBox";
+import ProfileUpdate from "./pages/ProfileUpdate";
+import ProfileView from "./componets/ProfileUpdationAndView/ProfileView";
+import { loader as profileViewLoader } from "./componets/ProfileUpdationAndView/ProfileView";
+import UpdatePictures, {loader as updatePicturesLoader , action as updatePicturesAction} from "./componets/ProfileUpdationAndView/UpdatePhotos";
+import UpdateInfo  , {loader as loaderUpdateInfo , action as actionUpadateInfo} from "./componets/ProfileUpdationAndView/UpdateInfo";
+import ChangePassword , {loader as changePasswordLoader}from "./componets/ProfileUpdationAndView/ChangePassword";
 
 const router = createBrowserRouter(createRoutesFromElements(
   <>
@@ -36,6 +42,25 @@ const router = createBrowserRouter(createRoutesFromElements(
                   action={sendAction}
                 />
           </Route>
+          <Route path="profile"
+                 element={<ProfileUpdate/>}>
+              <Route path="preview"
+                     element={<ProfileView/>}
+                     loader={profileViewLoader}/>
+              <Route path="update_pictures"
+                     element={<UpdatePictures/>}
+                     loader={updatePicturesLoader}
+                     action={updatePicturesAction}/>
+              <Route path="update_info"
+                     element={<UpdateInfo/>}
+                     loader={loaderUpdateInfo}
+                     action={actionUpadateInfo}/>
+              <Route path="change_password"
+                     element={<ChangePassword/>}
+                     loader={changePasswordLoader}/>
+                     
+          </Route>
+        
           
     </Route> 
   </>
