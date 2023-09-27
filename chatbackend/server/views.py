@@ -106,3 +106,4 @@ class ServerListViewSet(viewsets.ViewSet):
 
         serializer = ServerSerializer(self.queryset, many=True, context={"num_members": with_num_members})
         return Response(serializer.data)
+ 

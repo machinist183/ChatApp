@@ -21,7 +21,7 @@ class RegisterView(APIView):
         if serializer.is_valid():
             username = serializer.validated_data["username"]
             forbidden_usernames = ["admin", "root", "superuser"]
-            if username is forbidden_usernames:
+            if username in forbidden_usernames:
                 return Response({"error": "Username not allowed"}, status=status.HTTP_409_CONFLICT)
 
             serializer.save()

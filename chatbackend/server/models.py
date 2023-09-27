@@ -37,12 +37,12 @@ class Category(models.Model):
 
     @receiver(models.signals.pre_delete, sender="server.Category")
     def category_delete_files(sender, instance, **kwargs):
-        for field in instance._meta.fields:
+        for field in instance._meta.fields: 
             if field.name == "icon":
                 file = getattr(instance, field.name)
                 if file:
                     file.delete(save=False)
-
+                    
     def __str__(self):
         return self.name
 

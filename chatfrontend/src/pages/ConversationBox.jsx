@@ -15,7 +15,7 @@ export default function ConversationBox(props){
     const userDetails = conversationDetailData.userDetails
     const messages = conversationDetailData.messages
     return(
-        <div className="min-w-[50%] flex flex-col space justify-between border-2 border-black">
+        <div className="min-w-[50%] flex flex-col space justify-between">
             <ConversationBanner userDetails ={userDetails}/>
             <MessageArea messages={messages} userDetails ={userDetails}/>
             <InputBox/>

@@ -29,7 +29,7 @@ export default function AllMessageList() {
 
   return (
     <div className="flex flex-row">
-      <Listbox className="w-[30%]">
+      <Listbox className="w-[30%] shadow-lg shadow-black">
         <ListboxSection title="Private Chats" showDivider>
           {privateConvoDataList.map((conversation)=>{
             return(

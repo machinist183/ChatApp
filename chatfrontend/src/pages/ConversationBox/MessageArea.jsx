@@ -52,7 +52,7 @@ export default function MessageArea(props){
     }, [messages]);
 
     return(
-        <div ref={messageContainerRef} className="flex flex-col border-4 border-red-800   overflow-auto">
+        <div ref={messageContainerRef} className="flex flex-col   overflow-auto">
             {messageElements}
         </div>
     )

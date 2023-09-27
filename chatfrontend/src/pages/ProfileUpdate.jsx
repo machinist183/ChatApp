@@ -15,7 +15,7 @@ export default function ProfileUpdate(props){
         setDarkMode(darkMode=>!darkMode)
     }
     let iconClasses = "text-[1.5rem] p-4"
-    let tabClasses = "h-full w-[100%] border-4 border-black"
+    let tabClasses = "h-full w-[100%]"
     let tabTitleClasses = "m-4 font-bold"
     let tabLinkClasses = "flex flex-row"
     return( 

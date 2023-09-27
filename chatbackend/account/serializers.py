@@ -13,7 +13,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def is_valid(self, raise_exception=False):
         valid = super().is_valid(raise_exception=raise_exception)
-
+        
         if valid:
             username = self.validated_data["username"]
             if Account.objects.filter(username=username).exists():
@@ -35,13 +35,12 @@ class AccountSerializer(serializers.ModelSerializer):
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super().get_token(user)
-        token["example"] = "example"
 
         return token
 
     def validate(self, attrs):
         data = super().validate(attrs)
-        data["user_id"] = self.user.id
+        data["username"] = self.user.username
         return data
 
 
