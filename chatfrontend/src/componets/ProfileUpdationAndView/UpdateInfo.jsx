@@ -1,19 +1,57 @@
 import { Form, useLoaderData } from "react-router-dom";
-import { getUserDetails } from "../../data/dataApi";
-import { Button } from "@nextui-org/react";
+import { Button, modal } from "@nextui-org/react";
 import { useState } from "react";
+import axiosWithJwtInterceptor , {redirectToLogin} from "../../helpers/jwtInterceptor";
+import { API_BASE_URL } from "../../config";
 
-export function loader({params}){
-    return getUserDetails(parseInt(params.userId ))
+
+export async function loader({ params }) {
+    const jwtAxios = axiosWithJwtInterceptor()
+    const userId = params["userId"]
+  
+    try {
+        const response = await jwtAxios.get(
+            `${API_BASE_URL}/profile/${userId}`,
+            {
+                withCredentials:true,
+            }
+        )
+        return response.data
+    } catch (error) {
+        console.log(error)
+        redirectToLogin(error)
+        return error
+    }
 }
-export async function action({request}){
-    console.log(await request.formData())
-    return null
+
+export async function action({ request , params }) {
+
+    const formData = await  request.formData()
+    const aboutMe = formData.get("aboutme")
+    const mood = formData.get("mood")
+    const jwtAxios = axiosWithJwtInterceptor()
+    const userId = params["userId"]
+    try {
+        const response = await jwtAxios.patch(
+            `${API_BASE_URL}/profile/${userId}/`,
+            {
+                "about_me":aboutMe,
+                "mood":mood
+            },
+            {
+                withCredentials:true,
+            }
+        )
+        return response.data
+    } catch (error) {
+        redirectToLogin(error)
+        return error
+    }
 }
 export default function UpdateInfo(){
-    const userDetails = useLoaderData()
 
-    const [userAboutMe, setUserAboutMe] = useState(userDetails.description)
+    const userDetails = useLoaderData()
+    const [userAboutMe, setUserAboutMe] = useState(userDetails.about_me)
     const [userMood , setUserMood] = useState(userDetails.mood)
 
     const handleAboutMeChange = (event) => {

@@ -5,10 +5,25 @@ import { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCamera , faXmark} from "@fortawesome/free-solid-svg-icons"
 import { Tabs , Tab } from "@nextui-org/react"
+import axiosWithJwtInterceptor from "../helpers/jwtInterceptor"
+import { API_BASE_URL } from "../config"
 
 export async function loader({ params }) {
-    const id = params.userId
-    return getUserDetails(parseInt(id))
+    const jwtAxios = axiosWithJwtInterceptor()
+    const userId = params.get("userId")
+    try {
+        const response = await jwtAxios.get(
+            `${API_BASE_URL}/profile/${userId}`,
+            {
+                withCredentials:true,
+            }
+        )
+        console.log(response)
+        return null
+    } catch (error) {
+        console.log(error)
+        return null
+    }
 }
 
 export async function action({ request }) {

@@ -4,6 +4,8 @@ from rest_framework_simplejwt.exceptions import InvalidToken
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
 from django.conf import settings
 from .models import UserProfile
+from django.core.validators import MinLengthValidator
+
 
  
 class UserSerializer(serializers.ModelSerializer):
@@ -30,10 +32,25 @@ class UserSerializer(serializers.ModelSerializer):
         return {'username': instance.username}
 
 class ResetPasswordSerializer(serializers.ModelSerializer):
+
+    old_password = serializers.CharField(write_only=True, required=True, validators=[MinLengthValidator(limit_value=8)])
+
     class Meta:
         model  = get_user_model()
-        fields = ['password']
-        extra_kwargs = {'password': {'write_only':True ,'min_length':8}}
+        fields = ['old_password', 'password']
+        extra_kwargs = {
+            'password': {'write_only': True, 'min_length': 8},
+            'old_password':{'write_only':True , 'min_length':8}
+        }
+    
+    def validate_old_password(self , value):
+
+        user = self.context['request'].user
+        if not user.check_password(value):
+            raise serializers.ValidationError('The password you have provided is incorrect')
+        return value
+
+
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
@@ -49,7 +66,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     def validate(self, attrs):
         data = super().validate(attrs)
-        data["username"] = self.user.id
+        data["user_id"] = self.user.id
         return data
 
 class JWTCookieTokenRefreshSerializer(TokenRefreshSerializer):

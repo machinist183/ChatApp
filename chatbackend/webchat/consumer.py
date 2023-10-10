@@ -32,7 +32,7 @@ class WebChatConsumer(JsonWebsocketConsumer):
         channel_id = self.channel_id
         sender = self.user
         message = content["message"]
-
+        
         conversation, created = Conversation.objects.get_or_create(channel_id=channel_id)
 
         new_message = Message.objects.create(conversation=conversation, sender=sender, content=message)

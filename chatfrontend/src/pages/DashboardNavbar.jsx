@@ -1,5 +1,5 @@
 import { Tabs , Tab , Avatar , Button , Switch} from "@nextui-org/react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, redirect, useLoaderData } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear , faMessage ,
          faMagnifyingGlassArrowRight,
@@ -8,8 +8,22 @@ import { faGear , faMessage ,
          faArrowRightFromBracket,
          faSun ,
          faMoon } from '@fortawesome/free-solid-svg-icons';
-
 import {  useState } from "react";
+import { logout } from "../services/authService";
+
+async function loader(){
+    return null
+}
+
+async function handlelogout(){
+    try {
+        console.log("i am in logout")
+        const response = await logout()
+    } catch (error) {
+        console.log("i am in error")
+        return null
+    }
+}
 
 export default function DashboardNavbar(props){
     
@@ -96,10 +110,10 @@ export default function DashboardNavbar(props){
                     {!darkMode ? <FontAwesomeIcon icon={faMoon}  size={iconSize} color="#"/> :
                                  <FontAwesomeIcon icon={faSun} size={iconSize} color="#ffdd00" />}
                 </Button>
-                <Button isIconOnly radius="sm" variant="light">
-                    <Link   className="" to="/logout">
+                <Button isIconOnly radius="sm" variant="light" onPress={handlelogout}>
+                    <Link to="/login">
                         <FontAwesomeIcon icon={faArrowRightFromBracket} rotation={180} size={iconSize} />
-                    </Link>
+                    </Link> 
                 </Button>
             </div>
         </div>

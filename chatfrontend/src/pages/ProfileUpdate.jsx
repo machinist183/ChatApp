@@ -3,12 +3,31 @@ import { Link, Outlet, useLoaderData, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIdCardClip , faInfo , faImage , faKey } from '@fortawesome/free-solid-svg-icons';
 import {  useState } from "react";
-import { getUserDetails } from "../data/dataApi";
+import axiosWithJwtInterceptor , {redirectToLogin} from "../helpers/jwtInterceptor";
+import { API_BASE_URL } from "../config";
+
+export async function loader({ params }) {
+    const jwtAxios = axiosWithJwtInterceptor()
+    const userId = params["userId"]
+    try {
+        const response = await jwtAxios.get(
+            `${API_BASE_URL}/profile/${userId}`,
+            {
+                withCredentials:true,
+            }
+        )
+        return response.data
+    } catch (error) {
+        redirectToLogin(error)
+        return error
+    }
+}
 
 export default function ProfileUpdate(props){
     
     const userDetails = useLoaderData()
     const [darkMode , setDarkMode] = useState(false)
+
     let iconSize = "xl"
 
     function darkModeToggle(){
@@ -67,7 +86,6 @@ export default function ProfileUpdate(props){
                 </Tabs>
                 <Outlet className='border-4 border-yellow-800'/>
             </div>
-           
-       
+
     )
 }

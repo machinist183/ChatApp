@@ -1,25 +1,36 @@
-import { Form, useLoaderData } from "react-router-dom"
-import { Button, Input, Image } from "@nextui-org/react"
-import { getUserDetails } from "../../data/dataApi"
+import { useLoaderData } from "react-router-dom"
 import { useState } from "react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCamera , faXmark} from "@fortawesome/free-solid-svg-icons"
 import { Tabs , Tab } from "@nextui-org/react"
+import { API_BASE_URL } from "../../config"
+import axiosWithJwtInterceptor from "../../helpers/jwtInterceptor"
 
-export function loader({params}){
-    return getUserDetails(parseInt(params.userId ))
+export async function loader({ params }) {
+    const jwtAxios = axiosWithJwtInterceptor()
+    const userId = params["userId"]
+  
+    try {
+        const response = await jwtAxios.get(
+            `${API_BASE_URL}/profile/${userId}`,
+            {
+                withCredentials:true,
+            }
+        )
+        return response.data
+    } catch (error) {
+        console.log(error)
+        return null
+    }
 }
 export function action({request}){
-    console.log(request.formData())
     return null
 }
 
 export default function ProfileView() {
     const userDetails = useLoaderData()
-    const [userProfileUrl, setUserProfileUrl] = useState(userDetails.avatar)
-    const [userCoverUrl, setUserCoverUrl] = useState(userDetails.cover_pic)
-    const [userAboutMe, setUserAboutMe] = useState(userDetails.description)
-    const [userMood , setUserMood] = useState(userDetails.mood)
+    const [userProfileUrl, setUserProfileUrl] = useState(userDetails?.profile_pic)
+    const [userCoverUrl, setUserCoverUrl] = useState(userDetails?.cover_pic)
+    const [userAboutMe, setUserAboutMe] = useState(userDetails?.about_me)
+    const [userMood , setUserMood] = useState(userDetails?.mood)
     const [selectedTab , setSelectedTab] = useState('about')
     const [isEditing , setIsEditing] = useState(false)
  

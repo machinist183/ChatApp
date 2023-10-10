@@ -7,12 +7,12 @@ import { getUserDetails } from "../data/dataApi";
 
 export function loader({params}){
     console.log(`Params Id = ${params.userId}`)
-    return getUserDetails(parseInt(params.userId))
+    return getUserDetails(2)
 }
 
 export default function DashboardLayout(){
     const userDetails = useLoaderData()
-
+    
     return(
         <div className="flex flex-row h-[100vh]">  
             <DashboardNavbar userDetails = {userDetails}/>

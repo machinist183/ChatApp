@@ -12,6 +12,9 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated , AllowAny
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework.parsers import MultiPartParser
+from django.http import JsonResponse
+import json
 
 class UserViewSet(viewsets.ModelViewSet):
  
@@ -41,7 +44,11 @@ class UserViewSet(viewsets.ModelViewSet):
             user.save()
             return Response(f"Password successfullly changed" , status.HTTP_200_OK)
         errors = serializer.errors
-        return Response(f"{errors['password'][0]}" , status.HTTP_400_BAD_REQUEST)
+        response = {}
+        for key , value in errors.items():
+            response[key] = value[0]
+
+        return Response(response, status=status.HTTP_400_BAD_REQUEST)
     
     def update(self, request, **kwargs):
         return Response("Method Not Allowed", status=status.HTTP_405_METHOD_NOT_ALLOWED)
@@ -50,7 +57,6 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response("Method Not Allowed", status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def destroy(self, request, pk=None, **kwargs):
-
         if request.user.id == int(pk):
             user = self.get_object()  
             self.perform_destroy(user)  
@@ -74,13 +80,10 @@ class UserProfileViewset(viewsets.ModelViewSet):
 
     def partial_update(self  , request , pk = None , *args , **kwargs):
         profile = self.get_object()
-        print(request.user.id)
-        print(profile.user.id)
-        if request.user.id == int(profile.user.id):
-            print("i am inside")
+        if request.user == profile.user:
             return super().partial_update( request , pk = pk , *args , **kwargs)
         return Response(f'You are not allowed to perform this action', status=status.HTTP_403_FORBIDDEN)
-
+    
 class LogOutAPIView(APIView):
     def post(self, request, format=None):
         response = Response("Logged out successfully")

@@ -4,8 +4,8 @@ import { createBrowserRouter ,
          RouterProvider,} from "react-router-dom"
 import Landing from './pages/Landing'
 import {NextUIProvider} from "@nextui-org/react";
-import Register from "./pages/Register";
-import Login, { loader as loginLoader, loginAction } from "./pages/Login";
+import Register, { registerAction } from "./pages/Register";
+import Login, { loader as loginLoader, action as loginAction } from "./pages/Login";
 import DashboardLayout from "./pages/DashboardLayout";
 import AllMessageList, { loader as messageLoader } from "./pages/AllMessageList";
 import ConversationBox, { loader } from "./pages/ConversationBox";
@@ -17,17 +17,19 @@ import ProfileView from "./componets/ProfileUpdationAndView/ProfileView";
 import { loader as profileViewLoader } from "./componets/ProfileUpdationAndView/ProfileView";
 import UpdatePictures, {loader as updatePicturesLoader , action as updatePicturesAction} from "./componets/ProfileUpdationAndView/UpdatePhotos";
 import UpdateInfo  , {loader as loaderUpdateInfo , action as actionUpadateInfo} from "./componets/ProfileUpdationAndView/UpdateInfo";
-import ChangePassword , {loader as changePasswordLoader}from "./componets/ProfileUpdationAndView/ChangePassword";
+import ChangePassword , {loader as changePasswordLoader , action as changePasswordAction}from "./componets/ProfileUpdationAndView/ChangePassword";
+import { loader as ProfileLoader } from "./pages/ProfileUpdate";
 
 const router = createBrowserRouter(createRoutesFromElements(
   <>
     <Route path='/' element ={<Landing/>}/>
-    <Route path="/login"
+    <Route path="login"
            element={<Login/>}
            loader={loginLoader}
            action={loginAction}/>
-    <Route path="/register"
-           element={<Register/>}/>
+    <Route path="register"
+           element={<Register/>}
+           action={registerAction}/>
     <Route path="dashboard/:userId"
           element={<DashboardLayout/>}
           loader={layoutLoader}>
@@ -43,7 +45,8 @@ const router = createBrowserRouter(createRoutesFromElements(
                 />
           </Route>
           <Route path="profile"
-                 element={<ProfileUpdate/>}>
+                 element={<ProfileUpdate/>}
+                 loader={ProfileLoader}>
               <Route path="preview"
                      element={<ProfileView/>}
                      loader={profileViewLoader}/>
@@ -57,16 +60,11 @@ const router = createBrowserRouter(createRoutesFromElements(
                      action={actionUpadateInfo}/>
               <Route path="change_password"
                      element={<ChangePassword/>}
-                     loader={changePasswordLoader}/>
-                     
+                     loader={changePasswordLoader}
+                     action={changePasswordAction}/> 
           </Route>
-        
-          
-    </Route> 
+    </Route>  
   </>
-  
-  
-  
 ))
 function App() {
   return (
