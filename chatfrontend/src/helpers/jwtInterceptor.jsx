@@ -40,7 +40,7 @@ export default function axiosWithJwtInterceptor(){
   return jwtAxios;
 }
 export function redirectToLogin(refreshError){
-  if (refreshError?.response?.code == 401 || refreshError?.response?.code == 403){
+  if (refreshError?.response?.status == 401 || refreshError?.response?.status == 403 || refreshError?.response?.code==4001 ){
     throw redirect("/login/?message=Please login to access the given page")
   }
 }

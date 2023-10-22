@@ -164,7 +164,7 @@ CHANNEL_LAYERS = {
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=300),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=3000),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
     # JWTCookie
     "ACCESS_TOKEN_NAME": "access_token",

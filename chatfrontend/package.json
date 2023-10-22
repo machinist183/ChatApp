@@ -24,6 +24,7 @@
     "react-emoji-picker": "^1.0.13",
     "react-icons": "^4.10.1",
     "react-router-dom": "6.4",
+    "react-use-websocket": "^4.5.0",
     "sass": "^1.66.1"
   },
   "devDependencies": {

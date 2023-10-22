@@ -24,7 +24,7 @@ from account.views import (
 
 from rest_framework.routers import DefaultRouter
 from webchat.consumers import GroupChatConsumer , PrivateChatConsumer
-from webchat.views import MessageListView , PrivateMessageListView
+from webchat.views import MessageListView , PrivateMessageListView , GetUserPrivateConversations , GetUserGroupConversations
 
 router = DefaultRouter()
 urlpatterns = [
@@ -33,13 +33,15 @@ urlpatterns = [
     path('api/' , include('groups.urls')),
     path('api/<str:group_name>/messages/',MessageListView.as_view() , name="message_list"),
     path('api/privatemessages/<str:second_user>/',PrivateMessageListView.as_view() , name="private_message_list"),
+    path("api/privateconversations" ,GetUserPrivateConversations.as_view() , name="user_private_conversations"),
+    path("api/groupconversations" ,GetUserGroupConversations.as_view() , name="user_group_conversations"),
     path("api/token/", JWTCookieTokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/token/refresh/", JWTCookieTokenRefreshView.as_view(), name="token_refresh"),
     path("api/logout/", LogOutAPIView.as_view(), name="logout"),
 ] + router.urls
 
 websocket_urlpatterns =  [path('ws/groupchat/<str:group_name>',GroupChatConsumer.as_asgi()),
-                          path('ws/privatechat/<str:receiver_user_name>' ,PrivateChatConsumer.as_asgi() )]
+                          path('ws/privatechat/<str:receiver_user_name>' ,PrivateChatConsumer.as_asgi())]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -57,6 +57,11 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = UserProfile
         fields = '__all__'
         read_only_fields = ['user' , 'friends']
+    
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['username'] = instance.user.username
+        return representation
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):

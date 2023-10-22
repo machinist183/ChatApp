@@ -16,15 +16,16 @@ export default function UserPopover(props){
     return(
         <>
             <Popover showArrow>
-                <PopoverTrigger>  
+                <PopoverTrigger className="hover:shadow-box-hover dark:shadow-darkBox-hover min-w-fit">  
                     <div  className="min-w-[40%] flex flex-row items-center p-2">
-                        <Avatar isBordered radius="sm" src={userDetails.avatar}
-                                className="mr-2"
+                        <Avatar  radius="sm" size="lg" src={userDetails.profile_pic}
+                                className="mr-2 outline outline-2 outline-offset-2 outline-primary dark:outline-darkPrimary"
                         />
-                        <h3 className="font-normal ">{userDetails.username}</h3>
+                        <h3 className="text-large text-primary dark:text-darkPrimary font-bold ml-4">{userDetails.username}</h3>
                     </div>  
                 </PopoverTrigger>
-                <PopoverContent className="w-[40rem] h-[80vh]  flex flex-col justify-start p-0 m-0">
+                <PopoverContent className="w-[40rem] h-[80vh]  flex flex-col justify-start
+                                           p-0 m-0 bg-secondary dark:bg-darkSecondary shadow-box dark:shadow-darkBox">
                     <div className={`w-full h-[40%] flex flex-col 
                                     justify-between  bg-center
                                     ${ profilePicExpanded && 'blur-sm'} rounded-tl-xl rounded-tr-xl
@@ -33,14 +34,15 @@ export default function UserPopover(props){
                     >
 
                             <Popover placement="bottom-end">
-                                <PopoverTrigger>
+                                <PopoverTrigger className="mr-4 mt-4">
                                     <Button isIconOnly 
                                             variant="light"
                                             className="self-end">
                                             {<FontAwesomeIcon icon={faCaretDown} size="2xl" />}
                                     </Button>
                                 </PopoverTrigger>
-                                <PopoverContent className="">
+                                <PopoverContent  className="bg-secondary text-primary
+                                                            dark:bg-darkSecondary dark:text-darkPrimary">
                                     <Listbox radius="sm"
                                              variant="faded" aria-label="Listbox menu with icons"
                                              className="w-[100%]">
@@ -66,7 +68,7 @@ export default function UserPopover(props){
                                         </ListboxItem>
                                         <ListboxItem
                                         key="block"
-                                        className="text-danger"
+                                        className="text-danger dark:text-red-400"
                                         color="danger"
                                         startContent={<FontAwesomeIcon icon={faUserSlash}/>}
                                         >
@@ -81,13 +83,13 @@ export default function UserPopover(props){
                             <Image
                                     isBordered
                                     radius="sm"
-                                    src={userDetails.avatar}
+                                    src={userDetails.profile_pic}
                                     className={`h-[8rem] w-[8rem] m-4 ${ profilePicExpanded &&'bg-blur-sm'}`}
                                     onClick={handleProfilePicClick}
                             />
-                            <div className="flex flex-col justify-center text-black font-extrabold">
-                                <h3 className=" text-2xl">{userDetails.username}</h3>
-                                <h6 className=" text-md font-normal text-neutral-800">{userDetails.mood}</h6>
+                            <div className="flex flex-col justify-center ">
+                                <h3 className=" text-xl font-bold text-primary dark:text-darkPrimary">{userDetails.username}</h3>
+                                <h6 className=" text-base  text-primary dark:text-darkPrimary">{userDetails.mood}</h6>
                             </div>
                         </div>
                      
@@ -101,8 +103,11 @@ export default function UserPopover(props){
                             onSelectionChange={setSelectedTab}
                             classNames={{
                                 base:'',
-                                tabList:"h-16 rounded-none",
-                                tab:'h-full text-lg rounded-none'
+                                tabList:"h-16 rounded-none bg-secondary dark:bg-darkSecondary shadow-box dark:shadow-darkBox",
+                                tab:'h-full text-lg rounded-none bg-secondary dark:bg-darkSecondary',
+                                cursor:"group-data-[selected=true]:bg-quarternery group-data-[selected=true]:text-tertiary\
+                                        dark:group-data-[selected=true]:bg-darkQuarternery \
+                                        dark:group-data-[selected=true]:text-darkTertiary"
                             }}
                             >
                             <Tab key='about' title='About Me'>
@@ -128,7 +133,7 @@ export default function UserPopover(props){
                             </CardHeader>
                             <Image
                                 removeWrapper
-                                src={userDetails.avatar}
+                                src={userDetails.profile_pic}
                                 className="h-full w-full object-cover z-0"
                             />
                         </Card>

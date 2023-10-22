@@ -1,52 +1,49 @@
-import ConversationBanner from "./ConversationBox/ConversationBanner"
-import MessageArea from "./ConversationBox/MessageArea"
+import GroupConversationBanner from "./ConversationBox/GroupConversationBanner"
+import GroupMessageArea from "./ConversationBox/GroupMessageArea"
 import InputBox from "./ConversationBox/InputBox" 
-
-import { useLoaderData, useLocation, useParams } from "react-router-dom"
+import { useLoaderData} from "react-router-dom"
 import axiosWithJwtInterceptor, { redirectToLogin } from "../helpers/jwtInterceptor"
 import { API_BASE_URL , WEBCHAT_ROOT } from "../config"
-
 import { useState , useEffect} from "react"
-import useWebSocket, { ReadyState } from 'react-use-websocket';
+import useWebSocket  from 'react-use-websocket';
+import { faUnderline } from "@fortawesome/free-solid-svg-icons"
 
 
 export async function loader({params}){
     try {
-        const user_id = params["user_id"]
+        const groupName = params["groupName"]
         const jwtAxios = axiosWithJwtInterceptor()
-        const userDataResponse = await jwtAxios.get(
-            `${API_BASE_URL}/profile/${user_id}`,
+        const groupDataResponse = await jwtAxios.get(
+            `${API_BASE_URL}/groups/${groupName}`,
             {
                 withCredentials:true,
             }
         )
 
         const messagesResponse = await jwtAxios.get(
-            `${API_BASE_URL}/privatemessages/${user_id}`,
+            `${API_BASE_URL}/${groupName}/messages`,
             {
                 withCredentials:true,
             }
         )
         const messages = messagesResponse.data
-        const userDetails = userDataResponse.data
-        return  { userDetails , messages }
+        const groupDetails = groupDataResponse.data
+        return  { groupDetails , messages }
 
     } catch (error) {
         redirectToLogin(error)
-        console.log(error)
-        console.log('i am outside error')
         return error
     }
 }
 
-export default function ConversationBox(props){
+export default function GroupConversationBox(props){
 
-    const {userDetails , messages } = useLoaderData()
+    const {groupDetails , messages } = useLoaderData()
     const [messagesArray , setMessagesArray] = useState(messages)
     const [reconnectionAttempt , setReconnectionAttempt] = useState(0) 
-
-    const socketUrl = `${WEBCHAT_ROOT}/privatechat/${userDetails.username}`
+    const socketUrl = `${WEBCHAT_ROOT}/groupchat/${groupDetails.group_name}`
     const maxConnectionAttempts = 4
+
 
     useEffect(() => {
         setMessagesArray(messages); 
@@ -70,6 +67,7 @@ export default function ConversationBox(props){
         },
         onMessage: (msg) => {
           const msgObj = JSON.parse(msg.data)
+          console.log(msgObj)
           if (msgObj.type == 'error'){
             return
           }
@@ -89,10 +87,9 @@ export default function ConversationBox(props){
 
     return(
         <div className="flex flex-col justify-between w-full shadow-box dark:shadow-darkBox">
-            <ConversationBanner userDetails ={userDetails}/>
-            <MessageArea messages={messagesArray} userDetails ={userDetails}/>
+            <GroupConversationBanner groupDetails ={groupDetails}/>
+            <GroupMessageArea  messages={messagesArray} groupDetails ={groupDetails}/>
             <InputBox onSend = {sendJsonMessage} />
         </div>
     )
 }
-

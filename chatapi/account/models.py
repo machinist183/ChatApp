@@ -68,7 +68,8 @@ class UserProfile(models.Model):
     profile_pic = models.ImageField(upload_to=profile_pic_upload_path ,
                                     blank=True,
                                     null=True,
-                                    validators=[validate_image_file_exstension])
+                                    validators=[validate_image_file_exstension],
+                                    default='profile/profile_pics/default_profile.jpg')
     cover_pic = models.ImageField(upload_to=cover_pic_upload_path ,
                                     blank=True,
                                     null=True,

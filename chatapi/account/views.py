@@ -14,6 +14,7 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.parsers import MultiPartParser
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 import json
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -71,7 +72,15 @@ class UserProfileViewset(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
     permission_classes = [IsAuthenticated]
-
+    
+    def retrieve(self, request ,pk=None):
+        profile = get_object_or_404(self.queryset , pk=pk)
+        serializer = self.get_serializer(profile)
+        response_dict = serializer.data
+        response_dict['username'] = profile.user.username
+        return Response(response_dict, status = status.HTTP_200_OK)
+    
+    
     def create(self , *args , **kwargs):
         return Response("Method Not Allowed", status=status.HTTP_405_METHOD_NOT_ALLOWED)
     

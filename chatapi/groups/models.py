@@ -17,11 +17,11 @@ def cover_pic_upload_path(instance , filename):
 class Group(models.Model):
     group_name = models.CharField( max_length=20 ,primary_key=True ,unique = True )
     owner = models.ForeignKey(get_user_model() , on_delete=models.DO_NOTHING , default= 51)
-    conversation = models.OneToOneField( Conversation , on_delete= models.DO_NOTHING , null=True , blank = True)
+    conversation = models.OneToOneField( Conversation , on_delete= models.DO_NOTHING , null=True , blank = True , related_name='group')
     group_icon_pic = models.ImageField(upload_to=icon_pic_upload_path ,
-                                        null=True ,
                                         blank=True ,
-                                        validators=[validate_image_file_exstension])
+                                        validators=[validate_image_file_exstension],
+                                        default='group\group_icons\default_icon.jpg')
     group_cover_pic = models.ImageField(upload_to=cover_pic_upload_path , 
                                         null=True ,
                                         blank=True,

@@ -49,7 +49,10 @@ export default function ChangePassword(){
     const passwordChangeErrors = useActionData()
     const successfullyChangedFlag = passwordChangeErrors?.status == 200
     const [resetPasswordFormData,setResetPasswordFormData] = useState({})
-
+    const inputClassnames = "h-10 w-full text-large outline outline-1 outline-primary dark:outline-darkPrimary \
+                             focus:outline-[3px] focus:shadow-box-hover hover:outline-2 \
+                             px-4 shadow-box dark:shadow-darkBox bg-secondary dark:focus:shadow-darkBox-hover\
+                             dark:bg-darkSecondary"
    
     function handleChange(e) {
         const { name, value } = e.target
@@ -59,13 +62,12 @@ export default function ChangePassword(){
         }))
     }
     return(
-        <div className="w-3/5 h-3/4 m-auto translate-y-[20%]">
-            <Form method="post" className=" h-full w-full flex flex-col flex-auto ">
-                <div className="min-h-[10%] w-full flex flex-col justify-between mb-2">
-                    <label htmlFor="oldPassword" className="font-bold text-base mb-1">Old Password</label>
+        <div className="w-3/5 h-3/4 m-auto -translate-y-[20%] shadow-bo">
+            <Form method="post" className=" h-full w-full flex flex-col justify-center">
+                <div className="min-h-[10%] w-full flex flex-col justify-between mb-4">
+                    <label htmlFor="oldPassword" className="font-bold text-large mb-1">OLD PASSWORD</label>
                     <input type="password"
-                        className="h-full w-full border-2 border-neutral-500 focus:border-neutral-800
-                                   focus:border-3 outline-none focus:outline-none px-2"
+                        className={inputClassnames}
                         name="oldPassword"
                         id="oldPassword"
                         placeholder="Enter Old Password"
@@ -73,14 +75,14 @@ export default function ChangePassword(){
                         onChange={handleChange}
                     />
                     {passwordChangeErrors?.old_password &&
-                     <small className=" text-red-700">{passwordChangeErrors?.old_password}</small>
+                     <small className=" text-red-700 dark:text-red-400">{passwordChangeErrors?.old_password}</small>
                     }
                 </div>
-                <div className="min-h-[10%] w-full flex flex-col justify-between mb-2">
-                    <label htmlFor="newPassword" className="font-bold text-base mb-1">New Password</label>
-                    <input type="password"
-                        className="h-full w-full border-2 border-neutral-500 focus:border-neutral-800
-                                   focus:border-3 outline-none focus:outline-none px-2"
+                <div className="min-h-[10%] w-full flex flex-col justify-between mb-4">
+                    <label htmlFor="newPassword" className="font-bold text-large mb-1">NEW PASSWORD</label>
+                    <input 
+                        type="password"
+                        className={inputClassnames}
                         name="newPassword"
                         id="newPassword"
                         value={resetPasswordFormData.newPassword}
@@ -88,24 +90,28 @@ export default function ChangePassword(){
                         onChange={handleChange}
                       />
                     {passwordChangeErrors?.password &&
-                     <small className=" text-red-700">{passwordChangeErrors?.password}</small>
+                     <small className=" text-red-700 dark:text-red-400">{passwordChangeErrors?.password}</small>
                     }
                 </div>
-                <div className="min-h-[10%] w-full flex flex-col justify-between mb-2">
-                    <label htmlFor="confirmNewPassword" className="font-bold text-base mb-1">Confrim New Password</label>
+                <div className="min-h-[10%] w-full flex flex-col justify-between mb-4">
+                    <label htmlFor="confirmNewPassword" className="font-bold text-large mb-1">CONFIRM NEW PASSWORD</label>
                     <input type="password"
-                        className="h-full w-full border-2 border-neutral-500 focus:border-neutral-800
-                                   focus:border-3 outline-none focus:outline-none px-2"
+                        className={inputClassnames}
                         name="confirmNewPassword"
                         id="confirmNewPassword"
                         placeholder="Confirm New Password"
                         value={resetPasswordFormData?.confirmNewPassword}
                         onChange={handleChange}/>
                      {passwordChangeErrors?.password &&
-                     <small className=" text-red-700">{passwordChangeErrors?.password}</small>
+                     <small className=" text-red-700 dark:text-red-400">{passwordChangeErrors?.password}</small>
                     }
                 </div>
-                <Button type='submit' className="mt-4">
+                <Button type='submit' 
+                        className='font-semibold text-lg mt-2
+                                   shadow-button hover:shadow-button-hover
+                                 hover:text-quarternery hover:bg-primary font-serif text-inherit bg-quarternery
+                                   dark:shadow-darkButton dark:hover:shadow-darkButton-hover dark:hover:text-darkQuarternery
+                                   dark:hover:bg-darkPrimary dark:bg-darkQuarternery '>
                     Change Password
                 </Button>
             </Form>

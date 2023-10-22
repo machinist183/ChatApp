@@ -63,28 +63,35 @@ export default function UpdateInfo(){
     return(
         <div className="w-3/5 h-3/4  m-auto ">
             <Form method="post" className=" h-full w-full flex flex-col flex-auto ">
-                <div className="min-h-[10%] w-full flex flex-col justify-between mb-2">
-                    <label htmlFor="mood" className="font-bold text-base mb-1">MOOD</label>
+                <div className="min-h-[12%] w-full flex flex-col justify-between mb-2 ">
+                    <label htmlFor="mood" className="font-bold text-lg mb-1">MOOD</label>
                     <input type="text"
-                        className="h-full w-full border-2 border-neutral-500 focus:border-neutral-800
-                                   focus:border-3 outline-none focus:outline-none px-2"
+                        className="h-full w-full text-large outline outline-1 outline-primary dark:outline-darkPrimary
+                                   focus:outline-[3px] focus:shadow-box-hover dark:focus:shadow-darkBox-hover hover:outline-2
+                                   px-4 shadow-box dark:shadow-darkBox bg-secondary dark:bg-darkSecondary"
                         name="mood"
                         id="mood"
                         value={userMood}
                         onChange={handleMoodChange}/>
                 </div>
                 <div className=" min-h-4/5 w-full flex flex-col flex-auto justify-between mb-2">
-                    <label htmlFor="aboutme" className="font-bold text-base mb-1" >ABOUT ME</label>
+                    <label htmlFor="aboutme" className="font-bold text-lg  mb-1" >ABOUT ME</label>
                     <textarea type="text"
-                        className="h-full w-full border-2 border-neutral-500 focus:border-3
-                                   focus:border-neutral-800 outline-none focus:outline-none p-4"
+                        className="h-full w-full text-large outline outline-1 outline-primary dark:outline-darkPrimary
+                                   focus:outline-[3px] focus:shadow-box-hover dark:focus:shadow-darkBox-hover hover:outline-2
+                                   shadow-box dark:shadow-darkBox bg-secondary dark:bg-darkSecondary py-2 px-4"
                         name="aboutme"
                         id="aboutme"
                         value={userAboutMe}
                         onChange={handleAboutMeChange}
                         maxLength={100}/>
                 </div>
-                <Button type='submit' className="my-auto">
+                <Button type='submit'
+                        className='font-semibold text-lg mt-2 hover:text-quarternery hover:bg-primary font-serif 
+                                   text-inherit shadow-button hover:shadow-button-hover bg-quarternery
+                                   dark:shadow-darkButton dark:hover:shadow-darkButton-hover
+                                   dark:hover:text-darkQuarternery dark:hover:bg-darkPrimary
+                                   dark:bg-darkQuarternery'>
                     Save Changes
                 </Button>
             </Form>
